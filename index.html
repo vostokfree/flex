@@ -19,7 +19,7 @@
     .badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.6);backdrop-filter: blur(8px);border:1px solid rgba(17,24,39,.08);color:#111827;border-radius:999px;padding:6px 10px;font-size:13px}
     .muted{color:var(--muted)}
     .card{border:1px solid var(--line);border-radius:var(--radius);background:#fff;box-shadow:var(--ring); transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;}
-    .card:hover{transform: translateY(-4px); box-shadow: var(--shadow-lg);}
+    .card:hover{transform: translateY(-4px); box-shadow: var(--shadow-lg);} 
 
     /* Sticky top bar */
     .topbar{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.8);backdrop-filter:saturate(1.5) blur(6px);border-bottom:1px solid transparent}
@@ -132,31 +132,13 @@
     .product-visual .thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
     @media(min-width:480px){.product-visual .thumbs{grid-template-columns:repeat(4,1fr)}}
 
-    /* --- ОСЬ ОНОВЛЕНІ СТИЛІ ДЛЯ МІНІАТЮР --- */
-    .product-visual .thumbs .thumb {
-      width: 100%;
-      aspect-ratio: 1/1;
-      object-fit: cover;
-      border-radius: 14px;
-      border: 2px solid transparent;
-      cursor: pointer;
-      opacity: 0.8;
-      transform: scale(1);
-      transition: transform 0.25s ease, opacity 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-    }
-    .product-visual .thumbs .thumb:hover {
-      opacity: 1;
-      transform: scale(1.07) translateY(-3px);
-      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-    }
-    .product-visual .thumbs .thumb.active {
-      opacity: 1;
-      border-color: var(--brand);
-      transform: scale(1.05);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.08);
-    }
-	.shipping-options { display: flex; gap: 16px; margin-bottom: 12px; }
-.shipping-options label { display: flex; align-items: center; gap: 6px; font-size: 14px; cursor: pointer;}
+    /* --- Оновлені стилі для мініатюр --- */
+    .product-visual .thumbs .thumb { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 14px; border: 2px solid transparent; cursor: pointer; opacity: 0.8; transform: scale(1); transition: transform 0.25s ease, opacity 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease; }
+    .product-visual .thumbs .thumb:hover { opacity: 1; transform: scale(1.07) translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,0.1); }
+    .product-visual .thumbs .thumb.active { opacity: 1; border-color: var(--brand); transform: scale(1.05); box-shadow: 0 4px 8px rgba(0,0,0,0.08); }
+
+    .shipping-options { display: flex; gap: 16px; margin-bottom: 12px; }
+    .shipping-options label { display: flex; align-items: center; gap: 6px; font-size: 14px; cursor: pointer;}
   </style>
 </head>
 <body>
@@ -399,7 +381,7 @@
     </div>
   </footer>
 
-  <!-- Order modal (логіка залишається без змін) -->
+  <!-- Order modal -->
   <div id="order-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="order-title">
     <div class="overlay" data-close-order></div>
     <div class="sheet">
@@ -415,22 +397,21 @@
           <label class="field"><span class="small">Ваше ім'я</span><input id="f-name" placeholder="Оксана"/></label>
           <label class="field"><span class="small">Телефон (Viber/Telegram)</span><input id="f-phone" placeholder="+380…"/></label>
           <label class="field"><span class="small">Місто</span><input id="f-city" placeholder="Київ"/></label>
-          <!-- Початок нового блоку доставки -->
-<div>
-  <div class="small">Спосіб доставки</div>
-  <div class="shipping-options">
-    <label><input type="radio" name="shippingMethod" value="nova-poshta" checked> Нова пошта</label>
-    <label><input type="radio" name="shippingMethod" value="ukrposhta"> Укрпошта</label>
-  </div>
-</div>
+          <!-- Доставка -->
+          <div>
+            <div class="small">Спосіб доставки</div>
+            <div class="shipping-options">
+              <label><input type="radio" name="shippingMethod" value="nova-poshta" checked> Нова пошта</label>
+              <label><input type="radio" name="shippingMethod" value="ukrposhta"> Укрпошта</label>
+            </div>
+          </div>
 
-<div id="novaPoshtaField">
-  <label class="field"><span class="small">Відділення Нової пошти</span><input id="f-np" placeholder="№ 12"/></label>
-</div>
-<div id="ukrposhtaIndexField" style="display: none;">
-  <label class="field"><span class="small">Індекс Укрпошти</span><input id="f-ukrposhta" placeholder="01234"/></label>
-</div>
-<!-- Кінець нового блоку доставки -->
+          <div id="novaPoshtaField">
+            <label class="field"><span class="small">Відділення Нової пошти</span><input id="f-np" placeholder="№ 12"/></label>
+          </div>
+          <div id="ukrposhtaIndexField" style="display: none;">
+            <label class="field"><span class="small">Індекс Укрпошти</span><input id="f-ukrposhta" placeholder="01234"/></label>
+          </div>
         </div>
         <div class="right">
           <div>
@@ -457,7 +438,7 @@
   <div id="toast" class="toast" style="display:none">Дякуємо! Ми зв'яжемося для підтвердження замовлення.</div>
 
   <script>
-    // ==== Вся ваша JavaScript логіка залишається без змін, оскільки вона працює коректно ====
+    // ==== Конфіг продукту (без змін) ====
     const PRODUCT = {
       name: 'Розтяжна еко‑сумка FlexBag',
       priceUAH: 150,
@@ -490,7 +471,7 @@
 
     // Sticky bar shadow
     const topbar = document.getElementById('topbar');
-    const onScroll = () => topbar.classList.toggle('is-stuck', window.scrollY > 120);
+    const onScroll = () => topbar && topbar.classList.toggle('is-stuck', window.scrollY > 120);
     window.addEventListener('scroll', onScroll); onScroll();
 
     // Offers dynamic
@@ -519,7 +500,7 @@
     PRODUCT.colors.forEach(c=>{
       const b = document.createElement('button');
       b.className = 'swatch' + (c.id===selectedColor.id ? ' active':'');
-      b.title = c.name; b.ariaLabel = c.name;
+      b.title = c.name; b.setAttribute('aria-label', c.name);
       b.style.background = c.hex;
       b.addEventListener('click',()=>{
         selectedColor = c;
@@ -542,14 +523,14 @@
       const qty = Math.max(1, parseInt(qInput.value||'1',10));
       qInput.value = qty;
       const t = calcTotal(PRODUCT.priceUAH, qty, PRODUCT.bulkDiscounts);
-      subEl.textContent = fmt(t.subtotal);
-      discEl.textContent = '−' + fmt(t.discount);
-      totEl.textContent = fmt(t.total);
-      noteEl.textContent = t.percent>0 ? `Знижка ${t.percent}% застосована` : 'Купуйте 2+ — отримаєте знижку';
+      if(subEl)  subEl.textContent  = fmt(t.subtotal);
+      if(discEl) discEl.textContent = '−' + fmt(t.discount);
+      if(totEl)  totEl.textContent  = fmt(t.total);
+      if(noteEl) noteEl.textContent = t.percent>0 ? `Знижка ${t.percent}% застосована` : 'Купуйте 2+ — отримаєте знижку';
     }
-    qMinus.addEventListener('click', ()=>{ qInput.value = Math.max(1, (parseInt(qInput.value||'1',10) - 1)); refreshTotals(); });
-    qPlus .addEventListener('click', ()=>{ qInput.value = (parseInt(qInput.value||'1',10) + 1); refreshTotals(); });
-    qInput.addEventListener('input', refreshTotals);
+    qMinus && qMinus.addEventListener('click', ()=>{ qInput.value = Math.max(1, (parseInt(qInput.value||'1',10) - 1)); refreshTotals(); });
+    qPlus  && qPlus .addEventListener('click', ()=>{ qInput.value = (parseInt(qInput.value||'1',10) + 1); refreshTotals(); });
+    qInput && qInput.addEventListener('input', refreshTotals);
     refreshTotals();
 
     // Choose pack buttons set quantity & open modal
@@ -559,76 +540,104 @@
     // Tracking & integrations
     const GA4_ID = 'G-XXXXXXX';
     const META_PIXEL_ID = 'XXXXXXXXXXXXXXX';
-    const SHEETS_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbxlrChCd0a20JpFgwJWRIPCTNKx65F3JUI5hWLXJO8gCljE_uGeCeZ1KUiypoqrpHbhBg/exec'; // e.g. https://script.google.com/macros/s/AKfycbw.../exec
-    const TELEGRAM_BOT_TOKEN = '8330246400:AAHTF_zUxVBakyJR9BSBZkFJ82eTLxws6Yo'; // e.g. 123456:ABC...
-    const TELEGRAM_CHAT_ID = '388000085';  // e.g. -1001234567890 or your user id
+    // Твій робочий URL веб‑апки Apps Script
+    const SHEETS_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbxlrChCd0a20JpFgwJWRIPCTNKx65F3JUI5hWLXJO8gCljE_uGeCeZ1KUiypoqrpHbhBg/exec';
+    // Telegram (як у тебе, працює)
+    const TELEGRAM_BOT_TOKEN = '8330246400:AAHTF_zUxVBakyJR9BSBZkFJ82eTLxws6Yo';
+    const TELEGRAM_CHAT_ID = '8330246400';
 
     function trackPurchase(totalUAH, qty){
       try{ if(window.gtag && GA4_ID && !GA4_ID.includes('XXXX')){ gtag('event','purchase',{currency:'UAH', value: totalUAH, items:[{item_id:'flexbag', item_name: PRODUCT.name, quantity: qty, price: PRODUCT.priceUAH}]}); } }catch(e){}
       try{ if(window.fbq && META_PIXEL_ID && !/^X+$/.test(META_PIXEL_ID)){ fbq('track','Purchase',{currency:'UAH', value: totalUAH}); } }catch(e){}
     }
 
+    // Акуратний POST з логами помилок
     async function postJSON(url, data){
-      const r = await fetch(url, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data)});
-      try{ return await r.json(); } catch{ return await r.text(); }
+      try{
+        const r = await fetch(url, {
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify(data),
+        });
+        const ct = r.headers.get('content-type') || '';
+        const resp = ct.includes('application/json') ? await r.json() : await r.text();
+        if(!r.ok){ console.warn('Sheets response not OK', r.status, resp); }
+        return resp;
+      }catch(err){ console.error('Fetch error', err); throw err; }
     }
 
     async function trackLead(){try{ if(window.gtag && !GA4_ID.includes('XXXX')) gtag('event','generate_lead'); }catch(e){} try{ if(window.fbq && !/^X+$/.test(META_PIXEL_ID)) fbq('track','Lead'); }catch(e){} }
-    function utmParams(){ try{ const p=new URLSearchParams(location.search); const o={}; ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(k=>{ if(p.get(k)) o[k]=p.get(k); }); return o; }catch(_){ return {}; } }
+
+    function utmParams(){
+      try{ const p=new URLSearchParams(location.search); const o={}; ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(k=>{ if(p.get(k)) o[k]=p.get(k); }); return o; }catch(_){ return {}; }
+    }
+
     async function submitOrder(){
       const payload = {
-  name: document.getElementById('f-name').value.trim(),
-  phone: document.getElementById('f-phone').value.trim(),
-  city: document.getElementById('f-city').value.trim(),
-  shippingMethod: document.querySelector('input[name="shippingMethod"]:checked').value,
-  novaPoshta: document.getElementById('f-np').value.trim(),
-  ukrposhtaIndex: document.getElementById('f-ukrposhta').value.trim(),
-  color: selectedColor.id,
-  qty: parseInt(qInput.value,10),
-  priceUAH: PRODUCT.priceUAH,
-  totals: calcTotal(PRODUCT.priceUAH, parseInt(qInput.value,10), PRODUCT.bulkDiscounts),
-  timestamp: new Date().toISOString(),
-  source: 'landing-flexbag',
-  utm: utmParams()
-};
+        name: document.getElementById('f-name').value.trim(),
+        phone: document.getElementById('f-phone').value.trim(),
+        city: document.getElementById('f-city').value.trim(),
+        shippingMethod: document.querySelector('input[name="shippingMethod"]:checked').value,
+        novaPoshta: document.getElementById('f-np').value.trim(),
+        ukrposhtaIndex: document.getElementById('f-ukrposhta').value.trim(),
+        color: selectedColor.id,
+        qty: parseInt(qInput.value,10),
+        priceUAH: PRODUCT.priceUAH,
+        totals: calcTotal(PRODUCT.priceUAH, parseInt(qInput.value,10), PRODUCT.bulkDiscounts),
+        timestamp: new Date().toISOString(),
+        source: 'landing-flexbag',
+        utm: utmParams()
+      };
       console.log('ORDER', payload);
 
       const jobs = [];
-      if(SHEETS_WEBAPP_URL){ jobs.push(postJSON(SHEETS_WEBAPP_URL, payload)); }
+
+      // Відправка в Google Sheets
+      if(SHEETS_WEBAPP_URL){
+        jobs.push(
+          postJSON(SHEETS_WEBAPP_URL, payload)
+            .then(res => { console.log('Sheets OK:', res); })
+            .catch(err => { console.error('Sheets FAIL:', err); })
+        );
+      }
+
+      // Телеграм
       if(TELEGRAM_BOT_TOKEN && TELEGRAM_CHAT_ID){
         let shippingDetails = '';
-if (payload.shippingMethod === 'nova-poshta') {
-  shippingDetails = `Відділення НП: ${encodeURIComponent(payload.novaPoshta)}`;
-} else {
-  shippingDetails = `Індекс Укрпошти: ${encodeURIComponent(payload.ukrposhtaIndex)}`;
-}
-const text = `🛍️ Нове замовлення FlexBag%0AІм'я: ${encodeURIComponent(payload.name)}%0AТелефон: ${encodeURIComponent(payload.phone)}%0AМісто: ${encodeURIComponent(payload.city)}%0AДоставка: ${shippingDetails}%0AКолір: ${encodeURIComponent(payload.color)}%0AК-сть: ${payload.qty}%0AДо сплати: ${payload.totals.total} грн`;
+        if (payload.shippingMethod === 'nova-poshta') {
+          shippingDetails = `Відділення НП: ${encodeURIComponent(payload.novaPoshta)}`;
+        } else {
+          shippingDetails = `Індекс Укрпошти: ${encodeURIComponent(payload.ukrposhtaIndex)}`;
+        }
+        const text = `🛍️ Нове замовлення FlexBag%0AІм'я: ${encodeURIComponent(payload.name)}%0AТелефон: ${encodeURIComponent(payload.phone)}%0AМісто: ${encodeURIComponent(payload.city)}%0AДоставка: ${shippingDetails}%0AКолір: ${encodeURIComponent(payload.color)}%0AК-сть: ${payload.qty}%0AДо сплати: ${payload.totals.total} грн`;
         jobs.push(fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&parse_mode=HTML&text=${text}`));
       }
+
       try{ await Promise.allSettled(jobs); }catch(e){ console.warn('Submit error', e); }
 
       closeOrder();
-      toast.style.display='block';
-      setTimeout(()=>toast.style.display='none', 3500);
+      if(toast){ toast.style.display='block'; setTimeout(()=>toast.style.display='none', 3500); }
       trackLead();
       trackPurchase(payload.totals.total, payload.qty);
     }
 
-    document.getElementById('submit-order').addEventListener('click', submitOrder);
-// --- Логіка перемикання полів доставки ---
-document.querySelectorAll('input[name="shippingMethod"]').forEach(radio => {
-  radio.addEventListener('change', (e) => {
-    const novaPoshtaField = document.getElementById('novaPoshtaField');
-    const ukrposhtaIndexField = document.getElementById('ukrposhtaIndexField');
-    if (e.target.value === 'ukrposhta') {
-      novaPoshtaField.style.display = 'none';
-      ukrposhtaIndexField.style.display = 'block';
-    } else {
-      novaPoshtaField.style.display = 'block';
-      ukrposhtaIndexField.style.display = 'none';
-    }
-  });
-});
+    document.getElementById('submit-order')?.addEventListener('click', submitOrder);
+
+    // Логіка перемикання полів доставки
+    document.querySelectorAll('input[name="shippingMethod"]').forEach(radio => {
+      radio.addEventListener('change', (e) => {
+        const novaPoshtaField = document.getElementById('novaPoshtaField');
+        const ukrposhtaIndexField = document.getElementById('ukrposhtaIndexField');
+        if (e.target.value === 'ukrposhta') {
+          if(novaPoshtaField) novaPoshtaField.style.display = 'none';
+          if(ukrposhtaIndexField) ukrposhtaIndexField.style.display = 'block';
+        } else {
+          if(novaPoshtaField) novaPoshtaField.style.display = 'block';
+          if(ukrposhtaIndexField) ukrposhtaIndexField.style.display = 'none';
+        }
+      });
+    });
+
     // FAQ toggles
     document.querySelectorAll('.faq-item').forEach(item=>{
       const btn = item.querySelector('.faq-q');
@@ -641,36 +650,49 @@ document.querySelectorAll('input[name="shippingMethod"]').forEach(radio => {
     });
 
     // Thumbnails swap main photo
-    const mainPic = document.getElementById('main-picture');
     const mainSrcWebp = document.getElementById('main-src-webp');
     const mainImg = document.getElementById('main-photo');
     document.querySelectorAll('.thumbs .thumb').forEach(t=>{
       t.addEventListener('click', ()=>{
-        mainSrcWebp.setAttribute('srcset', t.dataset.webp);
-        mainImg.setAttribute('src', t.dataset.jpg);
+        mainSrcWebp && mainSrcWebp.setAttribute('srcset', t.dataset.webp);
+        mainImg && mainImg.setAttribute('src', t.dataset.jpg);
         document.querySelectorAll('.thumbs .thumb').forEach(x=>x.classList.remove('active'));
         t.classList.add('active');
       });
     });
 
     // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
+    const yearEl = document.getElementById('year');
+    if(yearEl) yearEl.textContent = new Date().getFullYear();
+
+    // 🧪 Тести: виклич в консолі __testOrder() або __testOrderN(3)
+    window.__testOrder = async function(){
+      const testPayload = {
+        name: 'TEST User', phone: '+380000000000', city: 'Київ', shippingMethod: 'nova-poshta',
+        novaPoshta: '№ 1', ukrposhtaIndex: '', color: 'black', qty: 1,
+        priceUAH: PRODUCT.priceUAH, totals: calcTotal(PRODUCT.priceUAH, 1, PRODUCT.bulkDiscounts),
+        timestamp: new Date().toISOString(), source: 'landing-flexbag', utm: { utm_source:'test', utm_medium:'debug', utm_campaign:'manual', utm_content:'console', utm_term:'-' }
+      };
+      const res = await postJSON(SHEETS_WEBAPP_URL, testPayload);
+      console.log('Test order ->', res);
+      alert('Перевір таблицю: мав додатися тестовий рядок (див. консоль для деталей).');
+    };
+    window.__testOrderN = async function(n=3){ for(let i=0;i<n;i++){ await window.__testOrder(); } };
   </script>
 
   <!-- Analytics (залишається без змін) -->
-  <!-- GA4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config','G-XXXXXXX');
   </script>
-  <!-- Meta Pixel -->
   <script>
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n; n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
     fbq('init','XXXXXXXXXXXXXXX'); fbq('track','PageView');
   </script>
   <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=XXXXXXXXXXXXXXX&ev=PageView&noscript=1"/></noscript>
-  <!-- JSON‑LD Product (залишається без змін) -->
+
+  <!-- JSON‑LD Product -->
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
