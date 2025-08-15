@@ -575,22 +575,62 @@
 
     async function trackLead(){try{ if(window.gtag && !GA4_ID.includes('XXXX')) gtag('event','generate_lead'); }catch(e){} try{ if(window.fbq && !/^X+$/.test(META_PIXEL_ID)) fbq('track','Lead'); }catch(e){} }
     function utmParams(){ try{ const p=new URLSearchParams(location.search); const o={}; ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(k=>{ if(p.get(k)) o[k]=p.get(k); }); return o; }catch(_){ return {}; } }
-    async function submitOrder(){
-      const payload = {
-  name: document.getElementById('f-name').value.trim(),
-  phone: document.getElementById('f-phone').value.trim(),
-  city: document.getElementById('f-city').value.trim(),
-  shippingMethod: document.querySelector('input[name="shippingMethod"]:checked').value,
-  novaPoshta: document.getElementById('f-np').value.trim(),
-  ukrposhtaIndex: document.getElementById('f-ukrposhta').value.trim(),
-  color: selectedColor.id,
-  qty: parseInt(qInput.value,10),
-  priceUAH: PRODUCT.priceUAH,
-  totals: calcTotal(PRODUCT.priceUAH, parseInt(qInput.value,10), PRODUCT.bulkDiscounts),
-  timestamp: new Date().toISOString(),
-  source: 'landing-flexbag',
-  utm: utmParams()
-};
+    // --- НОВА ФУНКЦІЯ SUBMITORDER ---
+async function submitOrder() {
+  // 1. Збираємо дані, як і раніше
+  const totals = calcTotal(PRODUCT.priceUAH, parseInt(qInput.value,10), PRODUCT.bulkDiscounts);
+  const payload = {
+    name: document.getElementById('f-name').value.trim(),
+    phone: document.getElementById('f-phone').value.trim(),
+    city: document.getElementById('f-city').value.trim(),
+    shippingMethod: document.querySelector('input[name="shippingMethod"]:checked').value,
+    novaPoshta: document.getElementById('f-np').value.trim(),
+    ukrposhtaIndex: document.getElementById('f-ukrposhta').value.trim(),
+    color: selectedColor.id,
+    qty: parseInt(qInput.value,10),
+    priceUAH: PRODUCT.priceUAH,
+    total: totals.total // Передаємо тільки фінальну суму
+  };
+
+  // 2. Формуємо URL для Google Sheets з даними
+  let googleUrl = SHEETS_WEBAPP_URL + "?";
+  for (const key in payload) {
+    googleUrl += `${encodeURIComponent(key)}=${encodeURIComponent(payload[key])}&`;
+  }
+  
+  // 3. Відкриваємо посилання в новій вкладці для обходу CORS
+  const newWindow = window.open(googleUrl, '_blank', 'width=100,height=100');
+  if (newWindow) {
+    setTimeout(() => newWindow.close(), 1500); // Закриваємо вікно через 1.5 сек
+  } else {
+    // Якщо спливаючі вікна заблоковані, просто спробуємо відправити запит у фоні
+    fetch(googleUrl, { mode: 'no-cors' }); 
+  }
+
+  // 4. Відправляємо дані в Telegram (якщо налаштовано)
+  if (TELEGRAM_BOT_TOKEN && TELEGRAM_CHAT_ID) {
+    let shippingDetails = '';
+    if (payload.shippingMethod === 'nova-poshta') {
+      shippingDetails = `Відділення НП: ${encodeURIComponent(payload.novaPoshta)}`;
+    } else {
+      shippingDetails = `Індекс Укрпошти: ${encodeURIComponent(payload.ukrposhtaIndex)}`;
+    }
+    const text = `🛍️ Нове замовлення FlexBag%0AІм'я: ${encodeURIComponent(payload.name)}%0AТелефон: ${encodeURIComponent(payload.phone)}%0AМісто: ${encodeURIComponent(payload.city)}%0AДоставка: ${shippingDetails}%0AКолір: ${encodeURIComponent(payload.color)}%0AК-сть: ${payload.qty}%0AДо сплати: ${payload.total} грн`;
+    // Використовуємо fetch з no-cors для надійності
+    fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&parse_mode=HTML&text=${text}`, { mode: 'no-cors' });
+  }
+  
+  // 5. Показуємо повідомлення про успіх
+  closeOrder();
+  toast.style.display='block';
+  setTimeout(()=>toast.style.display='none', 3500);
+  
+  console.log('ORDER SENT VIA REDIRECT/FETCH', payload);
+
+  // Викликаємо функції аналітики, якщо вони є
+  trackLead();
+  trackPurchase(payload.total, payload.qty);
+}
       console.log('ORDER', payload);
 
       const jobs = [];
