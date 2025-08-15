@@ -544,7 +544,7 @@
     const SHEETS_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbxlrChCd0a20JpFgwJWRIPCTNKx65F3JUI5hWLXJO8gCljE_uGeCeZ1KUiypoqrpHbhBg/exec';
     // Telegram (як у тебе, працює)
     const TELEGRAM_BOT_TOKEN = '8330246400:AAHTF_zUxVBakyJR9BSBZkFJ82eTLxws6Yo';
-    const TELEGRAM_CHAT_ID = '8330246400';
+    const TELEGRAM_CHAT_ID = '388000085';
 
     function trackPurchase(totalUAH, qty){
       try{ if(window.gtag && GA4_ID && !GA4_ID.includes('XXXX')){ gtag('event','purchase',{currency:'UAH', value: totalUAH, items:[{item_id:'flexbag', item_name: PRODUCT.name, quantity: qty, price: PRODUCT.priceUAH}]}); } }catch(e){}
