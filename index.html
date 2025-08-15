@@ -5,11 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>FlexBag — розтяжна еко‑сумка | Офіційний лендінг</title>
   <meta name="description" content="Розтяжна складна еко‑сумка: вміщує більше, важить менше. Міцні шви, довгі ручки, водовідштовхувальна тканина. Доставка Новою поштою та Укрпоштою."/>
-  <!-- Preload key product image (local) -->
-  <link rel="preload" as="image" href="/assets/flexbag-1.webp" type="image/webp">
-  <link rel="preload" as="image" href="/assets/flexbag-1.jpg" type="image/jpeg">
+  <link rel="preload" as="image" href="assets/flexbag-1.webp" type="image/webp">
+  <link rel="preload" as="image" href="assets/flexbag-1.jpg" type="image/jpeg">
   <style>
-    /* --- Збережені ваші оригінальні кольори та налаштування --- */
     :root{--bg:#ffffff;--text:#0f172a;--muted:#475569;--line:#e5e7eb;--brand:#10b981;--brand-700:#059669;--brand-50:#ecfdf5;--ring:0 1px 2px rgba(2,6,23,.04),0 1px 1px rgba(2,6,23,.04),0 0 0 1px rgba(2,6,23,.04);--shadow-lg:0 10px 15px rgba(0,0,0,.06), 0 4px 6px rgba(0,0,0,.05);--radius:20px;--sec-pad:72px;--container:1200px}
     html,body{margin:0;padding:0;background:linear-gradient(180deg,#ecfdf5 0%,#fff 30%,#fff 100%);color:var(--text);font:16px/1.55 system-ui,-apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial,"Apple Color Emoji","Segoe UI Emoji"}
     .container{max-width:var(--container);margin:0 auto;padding:0 20px} *{box-sizing:border-box}
@@ -20,38 +18,24 @@
     .muted{color:var(--muted)}
     .card{border:1px solid var(--line);border-radius:var(--radius);background:#fff;box-shadow:var(--ring); transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;}
     .card:hover{transform: translateY(-4px); box-shadow: var(--shadow-lg);}
-
-    /* Sticky top bar */
     .topbar{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.8);backdrop-filter:saturate(1.5) blur(6px);border-bottom:1px solid transparent}
     .topbar.is-stuck{border-bottom-color:var(--line);box-shadow:0 1px 8px rgba(15,23,42,.06)}
     .topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0}
     .logo{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:var(--brand);color:#fff}
-
-    /* HERO */
     .hero{position:relative;overflow:hidden}
     .hero .blobs{position:absolute;inset:0;opacity:.45;z-index:-1}
     .blob{position:absolute;border-radius:999px;filter:blur(60px)}
     .blob.a{left:-80px;top:0;width:360px;height:360px;background:#a7f3d0}
     .blob.b{right:-40px;top:180px;width:360px;height:360px;background:#99f6e4}
     .hero-grid{display:grid;gap:32px;align-items:start;padding:56px 0}
-    @media(min-width:960px){.hero-grid{grid-template-columns:1.05fr .95fr; gap: 48px;}}
+    @media(min-width:960px){.hero-grid{grid-template-columns:1.05fr .95fr; gap: 48px;} .hero-grid > div:first-child { display: flex; flex-direction: column; justify-content: center; }}
     .hero h1{font-size:clamp(32px,5vw,56px);line-height:1.08;margin:0;letter-spacing:-.02em}
     .hero .hero-text{font-size:18px;max-width:640px; margin-top: 16px;}
     .hero ul{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:8px}
-
-    /* Gallery */
-    .gallery{display:grid;gap:16px}
-    @media(min-width:640px){.gallery{grid-template-columns:1fr 1fr}}
-    .gallery .item{overflow:hidden;border-radius:24px;border:1px solid var(--line);background:#fff;box-shadow:var(--ring)}
-    .gallery img{display:block;width:100%;height:100%;object-fit:cover}
-
-    /* Sections */
-    section{scroll-margin-top:96px;padding:var(--sec-pad) 0} 
+    section{scroll-margin-top:96px;padding:var(--sec-pad) 0}
     .section-title{text-align:center; margin-bottom: 48px;}
     .section-title h2{font-size:clamp(24px,2.2vw,32px);margin:0;letter-spacing:-.02em}
     .section-title p{margin:12px auto 0;color:var(--muted);max-width:680px}
-
-    /* Grid cards */
     .grid{display:grid;gap:24px}
     @media(min-width:640px){.grid.cols-2{grid-template-columns:repeat(2,1fr)}}
     @media(min-width:960px){.grid.cols-3{grid-template-columns:repeat(3,1fr)}.grid.cols-4{grid-template-columns:repeat(4,1fr)}}
@@ -59,32 +43,7 @@
     .tile .icon {color: var(--brand); width: 24px; height: 24px;}
     .tile h3 {margin: 12px 0 8px;}
     .tile p {margin: 0;}
-
-    /* Numbered steps */
-    .step{position:relative;padding:24px}
-    .step .n{position:absolute;left:24px;top:-14px;width:32px;height:32px;border-radius:999px;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:800;font-size:14px}
-
-    /* Offer cards */
-    .offer{display:flex;flex-direction:column;justify-content:space-between;padding:22px;border-radius:24px;border:1px solid var(--line);background:#fff;box-shadow:var(--ring)}
     .offer.best{outline:2px solid var(--brand); transform: scale(1.03); z-index: 10; position: relative;}
-    .offer .price {font-size: 28px;}
-    .offer ul {margin: 12px 0 0; padding-left: 18px;}
-    .offer .btn {width:100%; margin-top:12px;}
-    
-    /* Reviews */
-    .review{padding:22px}
-    .review p {margin: 8px 0 0;}
-    .review .author {margin-top: 12px; font-weight: 600;}
-
-    /* FAQ */
-    .faq-item{padding:18px;border:1px solid var(--line);border-radius:18px;background:#fff}
-    .faq-q{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;background:transparent;border:0;padding:0;text-align:left;font-weight:600;cursor:pointer}
-    .chev{transition:transform .25s ease}
-    .faq-a{grid-template-rows:0fr;display:grid;transition:grid-template-rows .3s ease;margin-top:8px}
-    .faq-a.open{grid-template-rows:1fr}
-    .faq-a > div{overflow:hidden;color:var(--muted)}
-
-    /* Order modal */
     .modal{position:fixed;inset:0;display:none;place-items:center;padding:16px;z-index:50}
     .modal.open{display:grid}
     .overlay{position:absolute;inset:0;background:rgba(0,0,0,.4);backdrop-filter: blur(4px)}
@@ -95,637 +54,85 @@
     .field{display:grid;gap:6px}
     .field input{border:1px solid var(--line);border-radius:12px;padding:10px 12px;outline:none}
     .field input:focus{border-color:#a7f3d0;box-shadow:0 0 0 3px rgba(16,185,129,.2)}
-    .swatches{display:flex;gap:10px}
-    .swatch{position:relative;width:36px;height:36px;border-radius:999px;border:2px solid transparent}
-    .swatch.active{border-color:#111827}
-    .qty{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:12px}
-    .qty input{width:64px;text-align:center;border-left:1px solid var(--line);border-right:1px solid var(--line);padding:8px 0}
-    .qty button{background:transparent;border:0;padding:8px 12px;cursor:pointer}
-    .summary{background:#f8fafc;border-radius:16px;padding:14px}
-    .toast{position:fixed;right:18px;bottom:18px;background:var(--brand);color:#fff;border-radius:16px;padding:12px 16px;box-shadow:var(--shadow-lg);z-index:60}
-
-    /* Helpers */
+    .shipping-options { display: flex; gap: 16px; margin-bottom: 12px; }
+    .shipping-options label { display: flex; align-items: center; gap: 6px; font-size: 14px; cursor: pointer;}
     .row{display:flex;align-items:center;gap:12px}
-    .center{text-align:center}
-    .strike{text-decoration:line-through;color:#9ca3af}
     .price{font-weight:800;color:var(--brand);font-size:28px}
     .small{font-size:12px;color:#64748b}
     .brand-text {color: var(--brand);}
-
-    /* Icons */
     .icon{width:20px;height:20px}
-
-    /* Bright theme enhancements */
     @keyframes shine{from{background-position:0% 50%}to{background-position:100% 50%}}
     @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
     html,body{background:radial-gradient(1200px 400px at 10% 0%, #a7f3d0 0%, rgba(255,255,255,0) 60%),radial-gradient(1000px 400px at 90% 20%, #fef08a 0%, rgba(255,255,255,0) 60%),linear-gradient(180deg,#ffffff 0%,#fff 100%)}
-    .blob.a{background:#34d399}
-    .blob.b{background:#f59e0b}
     .btn{background:linear-gradient(90deg,#10b981,#22d3ee,#a78bfa);background-size:200% 100%;animation:shine 5s linear infinite, pulse 2.6s ease-in-out infinite;box-shadow:0 14px 26px rgba(16,185,129,.28)}
-    .badge{background:linear-gradient(90deg,rgba(16,185,129,.2),rgba(14,165,233,.2));border-color:rgba(16,185,129,.35)}
     .offer.best{box-shadow:0 0 0 2px #10b981, 0 14px 22px rgba(16,185,129,.16)}
-
-    /* Product visual (big + thumbs) */
     .product-visual{display:grid;gap:12px}
     .product-visual .main-photo{overflow:hidden;border-radius:24px;border:1px solid var(--line);background:#fff;box-shadow:var(--ring)}
     .product-visual .main-photo img{display:block;width:100%;height:100%;object-fit:cover;aspect-ratio:4/3}
     .product-visual .thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
     @media(min-width:480px){.product-visual .thumbs{grid-template-columns:repeat(4,1fr)}}
-
-    /* --- ОСЬ ОНОВЛЕНІ СТИЛІ ДЛЯ МІНІАТЮР --- */
-    .product-visual .thumbs .thumb {
-      width: 100%;
-      aspect-ratio: 1/1;
-      object-fit: cover;
-      border-radius: 14px;
-      border: 2px solid transparent;
-      cursor: pointer;
-      opacity: 0.8;
-      transform: scale(1);
-      transition: transform 0.25s ease, opacity 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-    }
-    .product-visual .thumbs .thumb:hover {
-      opacity: 1;
-      transform: scale(1.07) translateY(-3px);
-      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-    }
-    .product-visual .thumbs .thumb.active {
-      opacity: 1;
-      border-color: var(--brand);
-      transform: scale(1.05);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.08);
-    }
-	.shipping-options { display: flex; gap: 16px; margin-bottom: 12px; }
-.shipping-options label { display: flex; align-items: center; gap: 6px; font-size: 14px; cursor: pointer;}
+    .product-visual .thumbs .thumb {width: 100%;aspect-ratio: 1/1;object-fit: cover;border-radius: 14px;border: 2px solid transparent;cursor: pointer;opacity: 0.8;transform: scale(1);transition: transform 0.25s ease, opacity 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;}
+    .product-visual .thumbs .thumb:hover {opacity: 1;transform: scale(1.07) translateY(-3px);box-shadow: 0 6px 12px rgba(0,0,0,0.1);}
+    .product-visual .thumbs .thumb.active {opacity: 1;border-color: var(--brand);transform: scale(1.05);box-shadow: 0 4px 8px rgba(0,0,0,0.08);}
   </style>
 </head>
 <body>
-  <!-- SVG sprite for icons -->
-  <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
-    <symbol id="i-bag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M6 7l-1 12a2 2 0 002 2h10a2 2 0 002-2L18 7z"/><path d="M8 7a4 4 0 018 0"/></symbol>
-    <symbol id="i-truck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M10 17h4V6H2v11h3"/><path d="M14 8h4l4 4v5h-2"/><circle cx="5" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></symbol>
-    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></symbol>
-    <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
-    <symbol id="i-recycle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M21 12l-3-5h-5"/><path d="M7.5 8L3 13l2.5 4.5"/><path d="M14 21h5l2-3.5"/></symbol>
-    <symbol id="i-box" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-      <path d="M3.27 6.96L12 12l8.73-5.04"/></symbol>
-    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.1 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.6 12.6 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.6 12.6 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
-    <symbol id="i-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></symbol>
-    <symbol id="i-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2 2-5z" transform="translate(6 1) scale(.7)"/></symbol>
-  </svg>
-
-  <!-- Sticky Topbar -->
-  <div id="topbar" class="topbar">
-    <div class="container topbar-inner">
-      <div class="row">
-        <div class="logo"><svg class="icon"><use href="#i-bag"/></svg></div>
-        <div>
-          <div style="font-weight:700">Розтяжна еко‑сумка FlexBag</div>
-          <div class="small">Складна • Містка • Міцна</div>
-        </div>
-      </div>
-      <div class="row" aria-hidden="true">
-        <span class="strike">699 грн</span>
-        <span class="price" id="sticky-price">150 грн</span>
-      </div>
-      <button class="btn" data-open-order><svg class="icon"><use href="#i-bag"/></svg> Замовити зараз</button>
-    </div>
-  </div>
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="blobs">
-      <div class="blob a"></div>
-      <div class="blob b"></div>
-    </div>
-    <div class="container hero-grid">
-      <div>
-        <div class="row" style="flex-wrap:wrap;gap:8px">
-          <span class="badge"><svg class="icon"><use href="#i-spark"/></svg> Хіт сезону</span>
-          <span class="badge"><svg class="icon"><use href="#i-shield"/></svg> 14 днів на повернення</span>
-          <span class="badge"><svg class="icon"><use href="#i-truck"/></svg> Доставка по Україні</span>
-        </div>
-        <h1>Розтяжна сумка, що <span class="brand-text">вміщує більше</span> і <span class="brand-text">важить менше</span></h1>
-        <p class="muted hero-text">Складай у кишеню, розкривай за секунди та носи без зайвого навантаження. Ідеальна для покупок, подорожей і щоденних справ.</p>
-        <ul>
-          <li class="row"><svg class="icon brand-text"><use href="#i-check"/></svg> Складається до розміру долоні</li>
-          <li class="row"><svg class="icon brand-text"><use href="#i-check"/></svg> Витримує до 20 кг</li>
-          <li class="row"><svg class="icon brand-text"><use href="#i-check"/></svg> Водовідштовхувальна тканина</li>
-          <li class="row"><svg class="icon brand-text"><use href="#i-check"/></svg> Посилені шви, довгі ручки</li>
-        </ul>
-        <div class="row" style="flex-wrap:wrap;align-items:flex-end;margin-top:24px;gap:16px">
-          <div>
-            <div class="price" id="hero-price">150 грн</div>
-            <div class="small">Звичайна ціна <span class="strike">299 грн</span></div>
-          </div>
-          <button class="btn" data-open-order><svg class="icon"><use href="#i-bag"/></svg> Замовити зі знижкою</button>
-          <div class="small">Післяплата: так • Нова пошта · Укрпошта</div>
-        </div>
-      </div>
-      <div class="product-visual">
-        <div class="main-photo card">
-          <picture id="main-picture">
-            <source id="main-src-webp" type="image/webp" srcset="/assets/flexbag-1.webp">
-            <img id="main-photo" src="/assets/flexbag-1.jpg" alt="FlexBag — велике фото" width="1200" height="1500" loading="eager" />
-          </picture>
-        </div>
-        <div class="thumbs">
-          <img class="thumb active" src="/assets/flexbag-1.jpg" data-webp="/assets/flexbag-1.webp" data-jpg="/assets/flexbag-1.jpg" alt="FlexBag — мініатюра 1" width="60" height="100" loading="lazy"/>
-          <img class="thumb" src="/assets/flexbag-2.jpg" data-webp="/assets/flexbag-2.webp" data-jpg="/assets/flexbag-2.jpg" alt="FlexBag — мініатюра 2" width="60" height="100" loading="lazy"/>
-          <img class="thumb" src="/assets/flexbag-3.jpg" data-webp="/assets/flexbag-3.webp" data-jpg="/assets/flexbag-3.jpg" alt="FlexBag — мініатюра 3" width="60" height="100" loading="lazy"/>
-          <img class="thumb" src="/assets/flexbag-4.jpg" data-webp="/assets/flexbag-4.webp" data-jpg="/assets/flexbag-4.jpg" alt="FlexBag — мініатюра 4" width="60" height="100" loading="lazy"/>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Benefits -->
-  <section id="benefits">
-    <div class="container">
-      <div class="section-title">
-        <h2>Чому FlexBag — краща за звичайний пакет?</h2>
-        <p>Економія, комфорт і турбота про довкілля в одному рішенні.</p>
-      </div>
-      <div class="grid cols-2 cols-4">
-        <div class="card tile"><svg class="icon"><use href="#i-box"/></svg><h3>Місткість</h3><p class="small">До 20 кг без розривів та деформацій</p></div>
-        <div class="card tile"><svg class="icon"><use href="#i-recycle"/></svg><h3>Багаторазова</h3><p class="small">Заміщує сотні одноразових пакетів щороку</p></div>
-        <div class="card tile"><svg class="icon"><use href="#i-shield"/></svg><h3>Міцні шви</h3><p class="small">Посилені ручки, комфорт на плечі</p></div>
-        <div class="card tile"><svg class="icon"><use href="#i-truck"/></svg><h3>Зручна доставка</h3><p class="small">Нова пошта / Укрпошта по всій Україні</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- How it works -->
-  <section id="how">
-    <div class="container">
-      <div class="section-title">
-        <h2>Складається — переноситься — розтягується</h2>
-        <p>Три прості кроки, і сумка готова до важких покупок.</p>
-      </div>
-      <div class="grid cols-3">
-        <div class="card step"><span class="n">1</span><p>Складіть у кишеню або бардачок</p></div>
-        <div class="card step"><span class="n">2</span><p>Розгорніть за секунду на касі</p></div>
-        <div class="card step"><span class="n">3</span><p>Несіть комфортно на плечі</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Offers -->
-  <section id="offers">
-    <div class="container">
-      <div class="section-title">
-        <h2>Вигідні набори</h2>
-        <p>Чим більше — тим дешевше. Ідеально для родини.</p>
-      </div>
-      <div class="grid cols-3">
-        <div class="offer">
-          <div class="small">Набір на 1 шт.</div>
-          <div class="row"><div class="price" data-pack-total="1">150 грн</div><div class="small">замість <span class="strike" data-pack-subtotal="1">150 грн</span></div></div>
-          <div class="small brand-text">Знижка 0%</div>
-          <button class="btn" data-choose-pack="1">Обрати</button>
-          <ul>
-            <li class="small">Післяплата без передоплати</li>
-            <li class="small">Доставка Нова пошта / Укрпошта</li>
-            <li class="small">14 днів на повернення</li>
-          </ul>
-        </div>
-        <div class="offer best">
-          <div class="small">Набір на 2 шт.</div>
-          <div class="row"><div class="price" data-pack-total="2">270 грн</div><div class="small">замість <span class="strike" data-pack-subtotal="2">300 грн</span></div></div>
-          <div class="small brand-text">Знижка 10%</div>
-          <button class="btn" data-choose-pack="2">Обрати</button>
-          <ul>
-            <li class="small">Післяплата без передоплати</li>
-            <li class="small">Доставка Нова пошта / Укрпошта</li>
-            <li class="small">14 днів на повернення</li>
-          </ul>
-        </div>
-        <div class="offer">
-          <div class="small">Набір на 3 шт.</div>
-          <div class="row"><div class="price" data-pack-total="3">382 грн</div><div class="small">замість <span class="strike" data-pack-subtotal="3">450 грн</span></div></div>
-          <div class="small brand-text">Знижка 15%</div>
-          <button class="btn" data-choose-pack="3">Обрати</button>
-          <ul>
-            <li class="small">Післяплата без передоплати</li>
-            <li class="small">Доставка Нова пошта / Укрпошта</li>
-            <li class="small">14 днів на повернення</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Reviews -->
-  <section id="reviews">
-    <div class="container">
-      <div class="section-title">
-        <h2>Відгуки покупців</h2>
-        <p>Люди вже користуються FlexBag щодня.</p>
-      </div>
-      <div class="grid cols-3">
-        <div class="card review"><div class="small">Перевірений покупець</div><p>“Дуже міцна та зручна. Вмістила весь тижневий набір продуктів і не врізалася в плече.”</p><div class="author small">Марина, Київ</div></div>
-        <div class="card review"><div class="small">Перевірений покупець</div><p>“Нарешті не купую пакети щоразу. Склалася в кишеню — і завжди під рукою.”</p><div class="author small">Олег, Дніпро</div></div>
-        <div class="card review"><div class="small">Перевірений покупець</div><p>“Взяла набір 3 шт: собі, чоловікові та мамі. Якість супер, шви акуратні.”</p><div class="author small">Ірина, Львів</div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section id="faq">
-    <div class="container">
-      <div class="section-title"><h2>Питання та відповіді</h2></div>
-      <div class="grid cols-2">
-        <div class="faq-item">
-          <button class="faq-q"><span>Скільки важить сумка у складеному вигляді?</span><svg class="icon chev"><use href="#i-chevron"/></svg></button>
-          <div class="faq-a"><div>Близько 60–100 г (залежить від кольору/партії). Легко носити з собою щодня.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q"><span>Чи можна прати у машинці?</span><svg class="icon chev"><use href="#i-chevron"/></svg></button>
-          <div class="faq-a"><div>Так, делікатний режим до 30°C. Не використовувати відбілювачі. Сушити при кімнатній температурі.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q"><span>Яка тканина?</span><svg class="icon chev"><use href="#i-chevron"/></svg></button>
-          <div class="faq-a"><div>Щільна, водовідштовхувальна синтетична тканина зі зміцненими швами для довгого терміну служби.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q"><span>Як відбувається доставка та оплата?</span><svg class="icon chev"><use href="#i-chevron"/></svg></button>
-          <div class="faq-a"><div>Надсилаємо Новою поштою або Укрпоштою протягом 24 год. Оплата при отриманні (післяплата) або карткою за бажанням.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q"><span>Чи можна повернути?</span><svg class="icon chev"><use href="#i-chevron"/></svg></button>
-          <div class="faq-a"><div>Так, є 14 днів на повернення або обмін за Законом України про захист прав споживачів.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q"><span>Які є кольори?</span><svg class="icon chev"><use href="#i-chevron"/></svg></button>
-          <div class="faq-a"><div>Доступні: Чорний, Зелений, Бежевий, Синій. У комплекті можна комбінувати.</div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Shipping -->
-  <section id="shipping">
-    <div class="container">
-      <div class="section-title"><h2>Доставка та гарантії</h2></div>
-      <div class="grid cols-3">
-        <div class="card tile"><svg class="icon"><use href="#i-truck"/></svg><h3>Швидка доставка</h3><p class="small">Відправляємо у день замовлення або наступного робочого дня. Номер ТТН надішлемо у месенджер.</p></div>
-        <div class="card tile"><svg class="icon"><use href="#i-shield"/></svg><h3>Безпечна оплата</h3><p class="small">Післяплата без передоплати або оплата карткою — як вам зручно.</p></div>
-        <div class="card tile"><svg class="icon"><use href="#i-phone"/></svg><h3>Підтримка</h3><p class="small">Пишіть у Telegram/Viber — відповідаємо швидко та допоможемо з підбором.</p></div>
-      </div>
-      <div class="center" style="margin-top:32px">
-        <button class="btn" data-open-order><svg class="icon"><use href="#i-bag"/></svg> Замовити FlexBag</button>
-        <div class="small" style="margin-top:8px">Покупка без ризику: 14 днів на повернення</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer style="border-top:1px solid var(--line);background:rgba(255,255,255,.8)">
-    <div class="container" style="padding:32px 0;text-align:center;">
-      <div style="font-weight:700; margin-bottom: 8px;">Розтяжна еко‑сумка FlexBag</div>
-      <p class="small" style="margin-top:8px; max-width: 400px; margin-left: auto; margin-right: auto;">
-        Офіційний односторінковий сайт продажу. <br>
-        Контакти: Telegram / Viber: +380 ХХ ХХХ ХХ ХХ | Email: shop@example.com
-      </p>
-      <div class="small" style="margin-top: 24px; border-top:1px solid var(--line);padding-top:24px">
-        © <span id="year"></span> FlexBag. Всі права захищені. 
-        <a href="#" style="color:inherit; margin-left: 8px;">Політика конфіденційності</a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Order modal (логіка залишається без змін) -->
-  <div id="order-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="order-title">
-    <div class="overlay" data-close-order></div>
-    <div class="sheet">
-      <div class="sheet-h">
-        <div>
-          <h3 id="order-title" style="margin:0;font-size:18px">Оформлення замовлення</h3>
-          <div class="small">Заповніть дані — і ми зв'яжемося для підтвердження</div>
-        </div>
-        <button class="btn btn-secondary" data-close-order>✕</button>
-      </div>
-      <div class="sheet-b">
-        <div class="left">
-          <label class="field"><span class="small">Ваше ім'я</span><input id="f-name" placeholder="Оксана"/></label>
-          <label class="field"><span class="small">Телефон (Viber/Telegram)</span><input id="f-phone" placeholder="+380…"/></label>
-          <label class="field"><span class="small">Місто</span><input id="f-city" placeholder="Київ"/></label>
-          <!-- Початок нового блоку доставки -->
-<div>
-  <div class="small">Спосіб доставки</div>
-  <div class="shipping-options">
-    <label><input type="radio" name="shippingMethod" value="nova-poshta" checked> Нова пошта</label>
-    <label><input type="radio" name="shippingMethod" value="ukrposhta"> Укрпошта</label>
-  </div>
-</div>
-
-<div id="novaPoshtaField">
-  <label class="field"><span class="small">Відділення Нової пошти</span><input id="f-np" placeholder="№ 12"/></label>
-</div>
-<div id="ukrposhtaIndexField" style="display: none;">
-  <label class="field"><span class="small">Індекс Укрпошти</span><input id="f-ukrposhta" placeholder="01234"/></label>
-</div>
-<!-- Кінець нового блоку доставки -->
-        </div>
-        <div class="right">
-          <div>
-            <div class="small">Колір</div>
-            <div class="swatches" id="swatches"></div>
-          </div>
-          <div>
-            <div class="small" style="margin-top:8px">Кількість</div>
-            <div class="qty"><button type="button" id="q-minus">−</button><input id="q-input" value="1" inputmode="numeric"/><button type="button" id="q-plus">+</button></div>
-            <div id="discount-note" class="small" style="margin-top:6px;color:var(--brand)">Купуйте 2+ — отримаєте знижку</div>
-          </div>
-          <div class="summary" id="summary">
-            <div class="row" style="justify-content:space-between"><span>Проміжний підсумок</span><strong id="sum-sub">150 грн</strong></div>
-            <div class="row" style="justify-content:space-between;color:var(--brand)"><span>Знижка</span><strong id="sum-disc">−0 грн</strong></div>
-            <div class="row" style="justify-content:space-between;border-top:1px solid var(--line);padding-top:8px"><span style="font-weight:700">До сплати</span><span style="font-weight:800" id="sum-total">150 грн</span></div>
-            <div class="small" style="margin-top:6px">Оплата при отриманні або карткою. Доставка: Нова пошта, Укрпошта.</div>
-          </div>
-          <button class="btn" id="submit-order" style="width:100%"><svg class="icon"><use href="#i-bag"/></svg> Підтвердити замовлення</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none"><symbol id="i-bag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7l-1 12a2 2 0 002 2h10a2 2 0 002-2L18 7z"/><path d="M8 7a4 4 0 018 0"/></symbol><symbol id="i-truck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 17h4V6H2v11h3"/><path d="M14 8h4l4 4v5h-2"/><circle cx="5" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></symbol><symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></symbol><symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol><symbol id="i-recycle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12l-3-5h-5"/><path d="M7.5 8L3 13l2.5 4.5"/><path d="M14 21h5l2-3.5"/></symbol><symbol id="i-box" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.27 6.96L12 12l8.73-5.04"/></symbol><symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.1 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.6 12.6 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.6 12.6 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol><symbol id="i-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></symbol><symbol id="i-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2 2-5z" transform="translate(6 1) scale(.7)"/></symbol></svg>
+  <div id="topbar" class="topbar"><div class="container topbar-inner"><div class="row"><div class="logo"><svg class="icon"><use href="#i-bag"/></svg></div><div><div style="font-weight:700">Розтяжна еко‑сумка FlexBag</div><div class="small">Складна • Містка • Міцна</div></div></div><div class="row" aria-hidden="true"><span class="strike">699 грн</span><span class="price" id="sticky-price">150 грн</span></div><button class="btn" data-open-order><svg class="icon"><use href="#i-bag"/></svg> Замовити зараз</button></div></div>
+  <section class="hero"><div class="blobs"><div class="blob a"></div><div class="blob b"></div></div><div class="container hero-grid"><div><div class="row" style="flex-wrap:wrap;gap:8px"><span class="badge"><svg class="icon"><use href="#i-spark"/></svg> Хіт сезону</span><span class="badge"><svg class="icon"><use href="#i-shield"/></svg> 14 днів на повернення</span><span class="badge"><svg class="icon"><use href="#i-truck"/></svg> Доставка по Україні</span></div><h1>Розтяжна сумка, що <span class="brand-text">вміщує більше</span> і <span class="brand-text">важить менше</span></h1><p class="muted hero-text">Складай у кишеню, розкривай за секунди та носи без зайвого навантаження. Ідеальна для покупок, подорожей і щоденних справ.</p><ul><li class="row"><svg class="icon brand-text"><use href="#i-check"/></svg> Складається до розміру долоні</li><li class="row"><svg class="icon brand-text"><use href="#i-check"/></svg> Витримує до 20 кг</li><li class="row"><svg class="icon brand-text"><use href="#i-check"/></svg> Водовідштовхувальна тканина</li><li class="row"><svg class="icon brand-text"><use href="#i-check"/></svg> Посилені шви, довгі ручки</li></ul><div class="row" style="flex-wrap:wrap;align-items:flex-end;margin-top:24px;gap:16px"><div><div class="price" id="hero-price">150 грн</div><div class="small">Звичайна ціна <span class="strike">299 грн</span></div></div><button class="btn" data-open-order><svg class="icon"><use href="#i-bag"/></svg> Замовити зі знижкою</button><div class="small">Післяплата: так • Нова пошта · Укрпошта</div></div></div><div class="product-visual"><div class="main-photo card"><picture id="main-picture"><source id="main-src-webp" type="image/webp" srcset="assets/flexbag-1.webp"><img id="main-photo" src="assets/flexbag-1.jpg" alt="FlexBag — велике фото" width="1200" height="1500" loading="eager" /></picture></div><div class="thumbs"><img class="thumb active" src="assets/flexbag-1.jpg" data-webp="assets/flexbag-1.webp" data-jpg="assets/flexbag-1.jpg" alt="FlexBag — мініатюра 1" width="400" height="400" loading="lazy"/><img class="thumb" src="assets/flexbag-2.jpg" data-webp="assets/flexbag-2.webp" data-jpg="assets/flexbag-2.jpg" alt="FlexBag — мініатюра 2" width="400" height="400" loading="lazy"/><img class="thumb" src="assets/flexbag-3.jpg" data-webp="assets/flexbag-3.webp" data-jpg="assets/flexbag-3.jpg" alt="FlexBag — мініатюра 3" width="400" height="400" loading="lazy"/><img class="thumb" src="assets/flexbag-4.jpg" data-webp="assets/flexbag-4.webp" data-jpg="assets/flexbag-4.jpg" alt="FlexBag — мініатюра 4" width="400" height="400" loading="lazy"/></div></div></div></section>
+  <section id="benefits"><div class="container"><div class="section-title"><h2>Чому FlexBag — краща за звичайний пакет?</h2><p>Економія, комфорт і турбота про довкілля в одному рішенні.</p></div><div class="grid cols-2 cols-4"><div class="card tile"><svg class="icon"><use href="#i-box"/></svg><h3>Місткість</h3><p class="small">До 20 кг без розривів та деформацій</p></div><div class="card tile"><svg class="icon"><use href="#i-recycle"/></svg><h3>Багаторазова</h3><p class="small">Заміщує сотні одноразових пакетів щороку</p></div><div class="card tile"><svg class="icon"><use href="#i-shield"/></svg><h3>Міцні шви</h3><p class="small">Посилені ручки, комфорт на плечі</p></div><div class="card tile"><svg class="icon"><use href="#i-truck"/></svg><h3>Зручна доставка</h3><p class="small">Нова пошта / Укрпошта по всій Україні</p></div></div></div></section>
+  <section id="how"><div class="container"><div class="section-title"><h2>Складається — переноситься — розтягується</h2><p>Три прості кроки, і сумка готова до важких покупок.</p></div><div class="grid cols-3"><div class="card step"><span class="n">1</span><p>Складіть у кишеню або бардачок</p></div><div class="card step"><span class="n">2</span><p>Розгорніть за секунду на касі</p></div><div class="card step"><span class="n">3</span><p>Несіть комфортно на плечі</p></div></div></div></section>
+  <section id="offers"><div class="container"><div class="section-title"><h2>Вигідні набори</h2><p>Чим більше — тим дешевше. Ідеально для родини.</p></div><div class="grid cols-3"><div class="offer"><div class="small">Набір на 1 шт.</div><div class="row"><div class="price" data-pack-total="1">150 грн</div><div class="small">замість <span class="strike" data-pack-subtotal="1">150 грн</span></div></div><div class="small brand-text">Знижка 0%</div><button class="btn" data-choose-pack="1">Обрати</button><ul><li class="small">Післяплата без передоплати</li><li class="small">Доставка Нова пошта / Укрпошта</li><li class="small">14 днів на повернення</li></ul></div><div class="offer best"><div class="small">Набір на 2 шт.</div><div class="row"><div class="price" data-pack-total="2">270 грн</div><div class="small">замість <span class="strike" data-pack-subtotal="2">300 грн</span></div></div><div class="small brand-text">Знижка 10%</div><button class="btn" data-choose-pack="2">Обрати</button><ul><li class="small">Післяплата без передоплати</li><li class="small">Доставка Нова пошта / Укрпошта</li><li class="small">14 днів на повернення</li></ul></div><div class="offer"><div class="small">Набір на 3 шт.</div><div class="row"><div class="price" data-pack-total="3">382 грн</div><div class="small">замість <span class="strike" data-pack-subtotal="3">450 грн</span></div></div><div class="small brand-text">Знижка 15%</div><button class="btn" data-choose-pack="3">Обрати</button><ul><li class="small">Післяплата без передоплати</li><li class="small">Доставка Нова пошта / Укрпошта</li><li class="small">14 днів на повернення</li></ul></div></div></div></section>
+  <section id="reviews"><div class="container"><div class="section-title"><h2>Відгуки покупців</h2><p>Люди вже користуються FlexBag щодня.</p></div><div class="grid cols-3"><div class="card review"><div class="small">Перевірений покупець</div><p>“Дуже міцна та зручна. Вмістила весь тижневий набір продуктів і не врізалася в плече.”</p><div class="author small">Марина, Київ</div></div><div class="card review"><div class="small">Перевірений покупець</div><p>“Нарешті не купую пакети щоразу. Склалася в кишеню — і завжди під рукою.”</p><div class="author small">Олег, Дніпро</div></div><div class="card review"><div class="small">Перевірений покупець</div><p>“Взяла набір 3 шт: собі, чоловікові та мамі. Якість супер, шви акуратні.”</p><div class="author small">Ірина, Львів</div></div></div></div></section>
+  <section id="faq"><div class="container"><div class="section-title"><h2>Питання та відповіді</h2></div><div class="grid cols-2"><div class="faq-item"><button class="faq-q"><span>Скільки важить сумка у складеному вигляді?</span><svg class="icon chev"><use href="#i-chevron"/></svg></button><div class="faq-a"><div>Близько 60–100 г (залежить від кольору/партії). Легко носити з собою щодня.</div></div></div><div class="faq-item"><button class="faq-q"><span>Чи можна прати у машинці?</span><svg class="icon chev"><use href="#i-chevron"/></svg></button><div class="faq-a"><div>Так, делікатний режим до 30°C. Не використовувати відбілювачі. Сушити при кімнатній температурі.</div></div></div><div class="faq-item"><button class="faq-q"><span>Яка тканина?</span><svg class="icon chev"><use href="#i-chevron"/></svg></button><div class="faq-a"><div>Щільна, водовідштовхувальна синтетична тканина зі зміцненими швами для довгого терміну служби.</div></div></div><div class="faq-item"><button class="faq-q"><span>Як відбувається доставка та оплата?</span><svg class="icon chev"><use href="#i-chevron"/></svg></button><div class="faq-a"><div>Надсилаємо Новою поштою або Укрпоштою протягом 24 год. Оплата при отриманні (післяплата) або карткою за бажанням.</div></div></div><div class="faq-item"><button class="faq-q"><span>Чи можна повернути?</span><svg class="icon chev"><use href="#i-chevron"/></svg></button><div class="faq-a"><div>Так, є 14 днів на повернення або обмін за Законом України про захист прав споживачів.</div></div></div><div class="faq-item"><button class="faq-q"><span>Які є кольори?</span><svg class="icon chev"><use href="#i-chevron"/></svg></button><div class="faq-a"><div>Доступні: Чорний, Зелений, Бежевий, Синій. У комплекті можна комбінувати.</div></div></div></div></div></section>
+  <section id="shipping"><div class="container"><div class="section-title"><h2>Доставка та гарантії</h2></div><div class="grid cols-3"><div class="card tile"><svg class="icon"><use href="#i-truck"/></svg><h3>Швидка доставка</h3><p class="small">Відправляємо у день замовлення або наступного робочого дня. Номер ТТН надішлемо у месенджер.</p></div><div class="card tile"><svg class="icon"><use href="#i-shield"/></svg><h3>Безпечна оплата</h3><p class="small">Післяплата без передоплати або оплата карткою — як вам зручно.</p></div><div class="card tile"><svg class="icon"><use href="#i-phone"/></svg><h3>Підтримка</h3><p class="small">Пишіть у Telegram/Viber — відповідаємо швидко та допоможемо з підбором.</p></div></div><div class="center" style="margin-top:32px"><button class="btn" data-open-order><svg class="icon"><use href="#i-bag"/></svg> Замовити FlexBag</button><div class="small" style="margin-top:8px">Покупка без ризику: 14 днів на повернення</div></div></div></section>
+  <footer style="border-top:1px solid var(--line);background:rgba(255,255,255,.8)"><div class="container" style="padding:32px 0;text-align:center;"><div style="font-weight:700; margin-bottom: 8px;">Розтяжна еко‑сумка FlexBag</div><p class="small" style="margin-top:8px; max-width: 400px; margin-left: auto; margin-right: auto;">Офіційний односторінковий сайт продажу. <br> Контакти: Telegram / Viber: +380 ХХ ХХХ ХХ ХХ | Email: shop@example.com</p><div class="small" style="margin-top: 24px; border-top:1px solid var(--line);padding-top:24px">© <span id="year"></span> FlexBag. Всі права захищені. <a href="#" style="color:inherit; margin-left: 8px;">Політика конфіденційності</a></div></div></footer>
+  <div id="order-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="order-title"><div class="overlay" data-close-order></div><div class="sheet"><div class="sheet-h"><div><h3 id="order-title" style="margin:0;font-size:18px">Оформлення замовлення</h3><div class="small">Заповніть дані — і ми зв'яжемося для підтвердження</div></div><button class="btn btn-secondary" data-close-order>✕</button></div><div class="sheet-b"><div class="left"><label class="field"><span class="small">Ваше ім'я</span><input id="f-name" placeholder="Оксана"/></label><label class="field"><span class="small">Телефон (Viber/Telegram)</span><input id="f-phone" placeholder="+380…"/></label><label class="field"><span class="small">Місто</span><input id="f-city" placeholder="Київ"/></label><label class="field"><span class="small">Відділення Нової пошти</span><input id="f-np" placeholder="№ 12"/></label></div><div class="right"><div><div class="small">Колір</div><div class="swatches" id="swatches"></div></div><div><div class="small" style="margin-top:8px">Кількість</div><div class="qty"><button type="button" id="q-minus">−</button><input id="q-input" value="1" inputmode="numeric"/><button type="button" id="q-plus">+</button></div><div id="discount-note" class="small" style="margin-top:6px;color:var(--brand)">Купуйте 2+ — отримаєте знижку</div></div><div class="summary" id="summary"><div class="row" style="justify-content:space-between"><span>Проміжний підсумок</span><strong id="sum-sub">150 грн</strong></div><div class="row" style="justify-content:space-between;color:var(--brand)"><span>Знижка</span><strong id="sum-disc">−0 грн</strong></div><div class="row" style="justify-content:space-between;border-top:1px solid var(--line);padding-top:8px"><span style="font-weight:700">До сплати</span><span style="font-weight:800" id="sum-total">150 грн</span></div><div class="small" style="margin-top:6px">Оплата при отриманні або карткою. Доставка: Нова пошта, Укрпошта.</div></div><button class="btn" id="submit-order" style="width:100%"><svg class="icon"><use href="#i-bag"/></svg> Підтвердити замовлення</button></div></div></div></div>
   <div id="toast" class="toast" style="display:none">Дякуємо! Ми зв'яжемося для підтвердження замовлення.</div>
-
   <script>
-    // ==== Вся ваша JavaScript логіка залишається без змін, оскільки вона працює коректно ====
-    const PRODUCT = {
-      name: 'Розтяжна еко‑сумка FlexBag',
-      priceUAH: 150,
-      compareAtUAH: 299,
-      colors: [
-        { id: 'black', name: 'Чорний', hex: '#111827' },
-        { id: 'green', name: 'Зелений', hex: '#16a34a' },
-        { id: 'beige', name: 'Бежевий', hex: '#e5e7eb' },
-        { id: 'blue', name: 'Синій', hex: '#2563eb' },
-      ],
-      bulkDiscounts: [
-        { qty: 2, percent: 10 },
-        { qty: 3, percent: 15 },
-        { qty: 5, percent: 25 },
-      ],
-      shippingMethods: ['Нова пошта','Укрпошта'],
-      returnsDays: 14,
-    };
-
-    const UAF = new Intl.NumberFormat('uk-UA');
-    const fmt = n => UAF.format(n) + ' грн';
-
-    function calcTotal(priceUAH, qty, bulkDiscounts){
-      const best = [...bulkDiscounts].reverse().find(t => qty >= t.qty);
-      const percent = best ? best.percent : 0;
-      const subtotal = priceUAH * qty;
-      const discount = Math.round(subtotal * percent / 100);
-      return { percent, subtotal, discount, total: subtotal - discount };
-    }
-
-    // Sticky bar shadow
-    const topbar = document.getElementById('topbar');
-    const onScroll = () => topbar.classList.toggle('is-stuck', window.scrollY > 120);
-    window.addEventListener('scroll', onScroll); onScroll();
-
-    // Offers dynamic
-    function updatePackCards(){
-      [1,2,3].forEach(q=>{
-        const t = calcTotal(PRODUCT.priceUAH, q, PRODUCT.bulkDiscounts);
-        const elT = document.querySelector(`[data-pack-total="${q}"]`);
-        const elS = document.querySelector(`[data-pack-subtotal="${q}"]`);
-        if(elT) elT.textContent = fmt(t.total);
-        if(elS) elS.textContent = fmt(t.subtotal);
-      });
-    }
-    updatePackCards();
-
-    // Order modal open/close
-    const modal = document.getElementById('order-modal');
-    const toast = document.getElementById('toast');
-    function trackBeginCheckout(){try{ if(window.gtag && !GA4_ID.includes('XXXX')) gtag('event','begin_checkout'); }catch(e){} try{ if(window.fbq && !/^X+$/.test(META_PIXEL_ID)) fbq('track','InitiateCheckout'); }catch(e){} }
-    document.querySelectorAll('[data-open-order]').forEach(b=>b.addEventListener('click',()=>{ modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); trackBeginCheckout(); }));
-    document.querySelectorAll('[data-close-order]').forEach(b=>b.addEventListener('click',closeOrder));
-    function closeOrder(){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); }
-
-    // Color swatches
-    const swWrap = document.getElementById('swatches');
-    let selectedColor = PRODUCT.colors[0];
-    PRODUCT.colors.forEach(c=>{
-      const b = document.createElement('button');
-      b.className = 'swatch' + (c.id===selectedColor.id ? ' active':'');
-      b.title = c.name; b.ariaLabel = c.name;
-      b.style.background = c.hex;
-      b.addEventListener('click',()=>{
-        selectedColor = c;
-        [...swWrap.children].forEach(ch=>ch.classList.remove('active'));
-        b.classList.add('active');
-      });
-      swWrap.appendChild(b);
-    });
-
-    // Quantity & totals
-    const qMinus = document.getElementById('q-minus');
-    const qPlus  = document.getElementById('q-plus');
-    const qInput = document.getElementById('q-input');
-    const subEl  = document.getElementById('sum-sub');
-    const discEl = document.getElementById('sum-disc');
-    const totEl  = document.getElementById('sum-total');
-    const noteEl = document.getElementById('discount-note');
-
-    function refreshTotals(){
-      const qty = Math.max(1, parseInt(qInput.value||'1',10));
-      qInput.value = qty;
-      const t = calcTotal(PRODUCT.priceUAH, qty, PRODUCT.bulkDiscounts);
-      subEl.textContent = fmt(t.subtotal);
-      discEl.textContent = '−' + fmt(t.discount);
-      totEl.textContent = fmt(t.total);
-      noteEl.textContent = t.percent>0 ? `Знижка ${t.percent}% застосована` : 'Купуйте 2+ — отримаєте знижку';
-    }
-    qMinus.addEventListener('click', ()=>{ qInput.value = Math.max(1, (parseInt(qInput.value||'1',10) - 1)); refreshTotals(); });
-    qPlus .addEventListener('click', ()=>{ qInput.value = (parseInt(qInput.value||'1',10) + 1); refreshTotals(); });
-    qInput.addEventListener('input', refreshTotals);
-    refreshTotals();
-
-    // Choose pack buttons set quantity & open modal
+    const PRODUCT = { name: 'Розтяжна еко‑сумка FlexBag', priceUAH: 150, compareAtUAH: 299, colors: [{ id: 'black', name: 'Чорний', hex: '#111827' }, { id: 'green', name: 'Зелений', hex: '#16a34a' }, { id: 'beige', name: 'Бежевий', hex: '#e5e7eb' }, { id: 'blue', name: 'Синій', hex: '#2563eb' }], bulkDiscounts: [{ qty: 2, percent: 10 }, { qty: 3, percent: 15 }, { qty: 5, percent: 25 }], shippingMethods: ['Нова пошта','Укрпошта'], returnsDays: 14 };
+    const UAF = new Intl.NumberFormat('uk-UA'); const fmt = n => UAF.format(n) + ' грн';
+    function calcTotal(priceUAH, qty, bulkDiscounts){ const best = [...bulkDiscounts].reverse().find(t => qty >= t.qty); const percent = best ? best.percent : 0; const subtotal = priceUAH * qty; const discount = Math.round(subtotal * percent / 100); return { percent, subtotal, discount, total: subtotal - discount }; }
+    const topbar = document.getElementById('topbar'); const onScroll = () => topbar.classList.toggle('is-stuck', window.scrollY > 120); window.addEventListener('scroll', onScroll); onScroll();
+    function updatePackCards(){ [1,2,3].forEach(q=>{ const t = calcTotal(PRODUCT.priceUAH, q, PRODUCT.bulkDiscounts); const elT = document.querySelector(`[data-pack-total="${q}"]`); const elS = document.querySelector(`[data-pack-subtotal="${q}"]`); if(elT) elT.textContent = fmt(t.total); if(elS) elS.textContent = fmt(t.subtotal); }); } updatePackCards();
+    const modal = document.getElementById('order-modal'); const toast = document.getElementById('toast'); function trackBeginCheckout(){try{ if(window.gtag && !GA4_ID.includes('XXXX')) gtag('event','begin_checkout'); }catch(e){} try{ if(window.fbq && !/^X+$/.test(META_PIXEL_ID)) fbq('track','InitiateCheckout'); }catch(e){} }
+    document.querySelectorAll('[data-open-order]').forEach(b=>b.addEventListener('click',()=>{ modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); trackBeginCheckout(); })); document.querySelectorAll('[data-close-order]').forEach(b=>b.addEventListener('click',closeOrder)); function closeOrder(){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); }
+    const swWrap = document.getElementById('swatches'); let selectedColor = PRODUCT.colors[0]; PRODUCT.colors.forEach(c=>{ const b = document.createElement('button'); b.className = 'swatch' + (c.id===selectedColor.id ? ' active':''); b.title = c.name; b.ariaLabel = c.name; b.style.background = c.hex; b.addEventListener('click',()=>{ selectedColor = c; [...swWrap.children].forEach(ch=>ch.classList.remove('active')); b.classList.add('active'); }); swWrap.appendChild(b); });
+    const qMinus = document.getElementById('q-minus'), qPlus = document.getElementById('q-plus'), qInput = document.getElementById('q-input'), subEl = document.getElementById('sum-sub'), discEl = document.getElementById('sum-disc'), totEl = document.getElementById('sum-total'), noteEl = document.getElementById('discount-note');
+    function refreshTotals(){ const qty = Math.max(1, parseInt(qInput.value||'1',10)); qInput.value = qty; const t = calcTotal(PRODUCT.priceUAH, qty, PRODUCT.bulkDiscounts); subEl.textContent = fmt(t.subtotal); discEl.textContent = '−' + fmt(t.discount); totEl.textContent = fmt(t.total); noteEl.textContent = t.percent>0 ? `Знижка ${t.percent}% застосована` : 'Купуйте 2+ — отримаєте знижку'; }
+    qMinus.addEventListener('click', ()=>{ qInput.value = Math.max(1, (parseInt(qInput.value||'1',10) - 1)); refreshTotals(); }); qPlus.addEventListener('click', ()=>{ qInput.value = (parseInt(qInput.value||'1',10) + 1); refreshTotals(); }); qInput.addEventListener('input', refreshTotals); refreshTotals();
     function trackAddToCart(q){ const t = calcTotal(PRODUCT.priceUAH, q, PRODUCT.bulkDiscounts); try{ if(window.gtag && !GA4_ID.includes('XXXX')) gtag('event','add_to_cart',{currency:'UAH', value:t.total, items:[{item_id:'flexbag', item_name:PRODUCT.name, quantity:q, price:PRODUCT.priceUAH}]}); }catch(e){} try{ if(window.fbq && !/^X+$/.test(META_PIXEL_ID)) fbq('track','AddToCart',{currency:'UAH', value:t.total}); }catch(e){} }
     document.querySelectorAll('[data-choose-pack]').forEach(b=>{ b.addEventListener('click',()=>{ const q = parseInt(b.getAttribute('data-choose-pack'),10); qInput.value = q; refreshTotals(); trackAddToCart(q); modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); trackBeginCheckout(); }); });
-
-    // Tracking & integrations
-    const GA4_ID = 'G-XXXXXXX';
-    const META_PIXEL_ID = 'XXXXXXXXXXXXXXX';
-    const SHEETS_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbxlrChCd0a20JpFgwJWRIPCTNKx65F3JUI5hWLXJO8gCljE_uGeCeZ1KUiypoqrpHbhBg/exec'; // e.g. https://script.google.com/macros/s/AKfycbw.../exec
-    const TELEGRAM_BOT_TOKEN = '8330246400:AAHTF_zUxVBakyJR9BSBZkFJ82eTLxws6Yo'; // e.g. 123456:ABC...
-    const TELEGRAM_CHAT_ID = '388000085';  // e.g. -1001234567890 or your user id
-
-    function trackPurchase(totalUAH, qty){
-      try{ if(window.gtag && GA4_ID && !GA4_ID.includes('XXXX')){ gtag('event','purchase',{currency:'UAH', value: totalUAH, items:[{item_id:'flexbag', item_name: PRODUCT.name, quantity: qty, price: PRODUCT.priceUAH}]}); } }catch(e){}
-      try{ if(window.fbq && META_PIXEL_ID && !/^X+$/.test(META_PIXEL_ID)){ fbq('track','Purchase',{currency:'UAH', value: totalUAH}); } }catch(e){}
-    }
-
-    async function postJSON(url, data){
-      const r = await fetch(url, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data)});
-      try{ return await r.json(); } catch{ return await r.text(); }
-    }
-
+    const GA4_ID = 'G-XXXXXXX'; const META_PIXEL_ID = 'XXXXXXXXXXXXXXX'; const SHEETS_WEBAPP_URL = ''; const TELEGRAM_BOT_TOKEN = ''; const TELEGRAM_CHAT_ID = '';
+    function trackPurchase(totalUAH, qty){ try{ if(window.gtag && GA4_ID && !GA4_ID.includes('XXXX')){ gtag('event','purchase',{currency:'UAH', value: totalUAH, items:[{item_id:'flexbag', item_name: PRODUCT.name, quantity: qty, price: PRODUCT.priceUAH}]}); } }catch(e){} try{ if(window.fbq && META_PIXEL_ID && !/^X+$/.test(META_PIXEL_ID)){ fbq('track','Purchase',{currency:'UAH', value: totalUAH}); } }catch(e){} }
+    async function postJSON(url, data){ const r = await fetch(url, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data)}); try{ return await r.json(); } catch{ return await r.text(); } }
     async function trackLead(){try{ if(window.gtag && !GA4_ID.includes('XXXX')) gtag('event','generate_lead'); }catch(e){} try{ if(window.fbq && !/^X+$/.test(META_PIXEL_ID)) fbq('track','Lead'); }catch(e){} }
     function utmParams(){ try{ const p=new URLSearchParams(location.search); const o={}; ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(k=>{ if(p.get(k)) o[k]=p.get(k); }); return o; }catch(_){ return {}; } }
-    // --- НОВА ФУНКЦІЯ SUBMITORDER ---
-async function submitOrder() {
-  // 1. Збираємо дані, як і раніше
-  const totals = calcTotal(PRODUCT.priceUAH, parseInt(qInput.value,10), PRODUCT.bulkDiscounts);
-  const payload = {
-    name: document.getElementById('f-name').value.trim(),
-    phone: document.getElementById('f-phone').value.trim(),
-    city: document.getElementById('f-city').value.trim(),
-    shippingMethod: document.querySelector('input[name="shippingMethod"]:checked').value,
-    novaPoshta: document.getElementById('f-np').value.trim(),
-    ukrposhtaIndex: document.getElementById('f-ukrposhta').value.trim(),
-    color: selectedColor.id,
-    qty: parseInt(qInput.value,10),
-    priceUAH: PRODUCT.priceUAH,
-    total: totals.total // Передаємо тільки фінальну суму
-  };
-
-  // 2. Формуємо URL для Google Sheets з даними
-  let googleUrl = SHEETS_WEBAPP_URL + "?";
-  for (const key in payload) {
-    googleUrl += `${encodeURIComponent(key)}=${encodeURIComponent(payload[key])}&`;
-  }
-  
-  // 3. Відкриваємо посилання в новій вкладці для обходу CORS
-  const newWindow = window.open(googleUrl, '_blank', 'width=100,height=100');
-  if (newWindow) {
-    setTimeout(() => newWindow.close(), 1500); // Закриваємо вікно через 1.5 сек
-  } else {
-    // Якщо спливаючі вікна заблоковані, просто спробуємо відправити запит у фоні
-    fetch(googleUrl, { mode: 'no-cors' }); 
-  }
-
-  // 4. Відправляємо дані в Telegram (якщо налаштовано)
-  if (TELEGRAM_BOT_TOKEN && TELEGRAM_CHAT_ID) {
-    let shippingDetails = '';
-    if (payload.shippingMethod === 'nova-poshta') {
-      shippingDetails = `Відділення НП: ${encodeURIComponent(payload.novaPoshta)}`;
-    } else {
-      shippingDetails = `Індекс Укрпошти: ${encodeURIComponent(payload.ukrposhtaIndex)}`;
-    }
-    const text = `🛍️ Нове замовлення FlexBag%0AІм'я: ${encodeURIComponent(payload.name)}%0AТелефон: ${encodeURIComponent(payload.phone)}%0AМісто: ${encodeURIComponent(payload.city)}%0AДоставка: ${shippingDetails}%0AКолір: ${encodeURIComponent(payload.color)}%0AК-сть: ${payload.qty}%0AДо сплати: ${payload.total} грн`;
-    // Використовуємо fetch з no-cors для надійності
-    fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&parse_mode=HTML&text=${text}`, { mode: 'no-cors' });
-  }
-  
-  // 5. Показуємо повідомлення про успіх
-  closeOrder();
-  toast.style.display='block';
-  setTimeout(()=>toast.style.display='none', 3500);
-  
-  console.log('ORDER SENT VIA REDIRECT/FETCH', payload);
-
-  // Викликаємо функції аналітики, якщо вони є
-  trackLead();
-  trackPurchase(payload.total, payload.qty);
-}
+    async function submitOrder(){
+      const payload = { name: document.getElementById('f-name').value.trim(), phone: document.getElementById('f-phone').value.trim(), city: document.getElementById('f-city').value.trim(), novaPoshta: document.getElementById('f-np').value.trim(), color: selectedColor.id, qty: parseInt(qInput.value,10), priceUAH: PRODUCT.priceUAH, totals: calcTotal(PRODUCT.priceUAH, parseInt(qInput.value,10), PRODUCT.bulkDiscounts), timestamp: new Date().toISOString(), source: 'landing-flexbag', utm: utmParams() };
       console.log('ORDER', payload);
-
       const jobs = [];
       if(SHEETS_WEBAPP_URL){ jobs.push(postJSON(SHEETS_WEBAPP_URL, payload)); }
       if(TELEGRAM_BOT_TOKEN && TELEGRAM_CHAT_ID){
-        let shippingDetails = '';
-if (payload.shippingMethod === 'nova-poshta') {
-  shippingDetails = `Відділення НП: ${encodeURIComponent(payload.novaPoshta)}`;
-} else {
-  shippingDetails = `Індекс Укрпошти: ${encodeURIComponent(payload.ukrposhtaIndex)}`;
-}
-const text = `🛍️ Нове замовлення FlexBag%0AІм'я: ${encodeURIComponent(payload.name)}%0AТелефон: ${encodeURIComponent(payload.phone)}%0AМісто: ${encodeURIComponent(payload.city)}%0AДоставка: ${shippingDetails}%0AКолір: ${encodeURIComponent(payload.color)}%0AК-сть: ${payload.qty}%0AДо сплати: ${payload.totals.total} грн`;
+        const text = `🛍️ Нове замовлення FlexBag%0AІм'я: ${encodeURIComponent(payload.name)}%0AТелефон: ${encodeURIComponent(payload.phone)}%0AМісто: ${encodeURIComponent(payload.city)}%0AВідділення НП: ${encodeURIComponent(payload.novaPoshta)}%0AКолір: ${encodeURIComponent(payload.color)}%0AК-сть: ${payload.qty}%0AДо сплати: ${payload.totals.total} грн`;
         jobs.push(fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&parse_mode=HTML&text=${text}`));
       }
       try{ await Promise.allSettled(jobs); }catch(e){ console.warn('Submit error', e); }
-
       closeOrder();
       toast.style.display='block';
       setTimeout(()=>toast.style.display='none', 3500);
       trackLead();
       trackPurchase(payload.totals.total, payload.qty);
     }
-
     document.getElementById('submit-order').addEventListener('click', submitOrder);
-// --- Логіка перемикання полів доставки ---
-document.querySelectorAll('input[name="shippingMethod"]').forEach(radio => {
-  radio.addEventListener('change', (e) => {
-    const novaPoshtaField = document.getElementById('novaPoshtaField');
-    const ukrposhtaIndexField = document.getElementById('ukrposhtaIndexField');
-    if (e.target.value === 'ukrposhta') {
-      novaPoshtaField.style.display = 'none';
-      ukrposhtaIndexField.style.display = 'block';
-    } else {
-      novaPoshtaField.style.display = 'block';
-      ukrposhtaIndexField.style.display = 'none';
-    }
-  });
-});
-    // FAQ toggles
-    document.querySelectorAll('.faq-item').forEach(item=>{
-      const btn = item.querySelector('.faq-q');
-      const box = item.querySelector('.faq-a');
-      const chev = item.querySelector('.chev');
-      btn.addEventListener('click',()=>{
-        box.classList.toggle('open');
-        chev.style.transform = box.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0)';
-      });
-    });
-
-    // Thumbnails swap main photo
-    const mainPic = document.getElementById('main-picture');
-    const mainSrcWebp = document.getElementById('main-src-webp');
-    const mainImg = document.getElementById('main-photo');
-    document.querySelectorAll('.thumbs .thumb').forEach(t=>{
-      t.addEventListener('click', ()=>{
-        mainSrcWebp.setAttribute('srcset', t.dataset.webp);
-        mainImg.setAttribute('src', t.dataset.jpg);
-        document.querySelectorAll('.thumbs .thumb').forEach(x=>x.classList.remove('active'));
-        t.classList.add('active');
-      });
-    });
-
-    // Year
+    document.querySelectorAll('.faq-item').forEach(item=>{ const btn = item.querySelector('.faq-q'); const box = item.querySelector('.faq-a'); const chev = item.querySelector('.chev'); btn.addEventListener('click',()=>{ box.classList.toggle('open'); chev.style.transform = box.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0)'; }); });
+    const mainPic = document.getElementById('main-picture'); const mainSrcWebp = document.getElementById('main-src-webp'); const mainImg = document.getElementById('main-photo'); document.querySelectorAll('.thumbs .thumb').forEach(t=>{ t.addEventListener('click', ()=>{ mainSrcWebp.setAttribute('srcset', t.dataset.webp); mainImg.setAttribute('src', t.dataset.jpg); document.querySelectorAll('.thumbs .thumb').forEach(x=>x.classList.remove('active')); t.classList.add('active'); }); });
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
-
-  <!-- Analytics (залишається без змін) -->
-  <!-- GA4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config','G-XXXXXXX');
-  </script>
-  <!-- Meta Pixel -->
-  <script>
-    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n; n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init','XXXXXXXXXXXXXXX'); fbq('track','PageView');
-  </script>
+  <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config','G-XXXXXXX'); </script>
+  <script> !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n; n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js'); fbq('init','XXXXXXXXXXXXXXX'); fbq('track','PageView'); </script>
   <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=XXXXXXXXXXXXXXX&ev=PageView&noscript=1"/></noscript>
-  <!-- JSON‑LD Product (залишається без змін) -->
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Product",
-      "name": "Розтяжна еко‑сумка FlexBag",
-      "image": [
-        "/assets/flexbag-1.webp",
-        "/assets/flexbag-2.webp",
-        "/assets/flexbag-3.webp",
-        "/assets/flexbag-4.webp"
-       ],
-      "description": "Розтяжна складна еко‑сумка для покупок з водовідштовхувальної тканини, посилені шви, довгі ручки.",
-      "brand": { "@type": "Brand", "name": "FlexBag" },
-      "offers": { "@type": "Offer", "priceCurrency": "UAH", "price": "150", "availability": "https://schema.org/InStock" }
-    }
-  </script>
+  <script type="application/ld+json"> { "@context": "https://schema.org", "@type": "Product", "name": "Розтяжна еко‑сумка FlexBag", "image": [ "/assets/flexbag-1.webp", "/assets/flexbag-2.webp", "/assets/flexbag-3.webp", "/assets/flexbag-4.webp" ], "description": "Розтяжна складна еко‑сумка для покупок з водовідштовхувальної тканини, посилені шви, довгі ручки.", "brand": { "@type": "Brand", "name": "FlexBag" }, "offers": { "@type": "Offer", "priceCurrency": "UAH", "price": "150", "availability": "https://schema.org/InStock" } } </script>
 </body>
 </html>
