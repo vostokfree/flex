@@ -552,19 +552,24 @@
     }
 
     // Акуратний POST з логами помилок
-    async function postJSON(url, data){
-      try{
-        const r = await fetch(url, {
-          method:'POST',
-          headers:{'Content-Type':'application/json'},
-          body: JSON.stringify(data),
-        });
-        const ct = r.headers.get('content-type') || '';
-        const resp = ct.includes('application/json') ? await r.json() : await r.text();
-        if(!r.ok){ console.warn('Sheets response not OK', r.status, resp); }
-        return resp;
-      }catch(err){ console.error('Fetch error', err); throw err; }
-    }
+    // ⬇️ ПОВНІСТЮ ЗАМІНИТИ ЦЮ ФУНКЦІЮ
+async function postJSON(url, data){
+  try{
+    const r = await fetch(url, {
+      method: 'POST',
+      // важливо: text/plain — тоді не буде preflight-запиту
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify(data)
+    });
+
+    // Якщо Apps Script повернув JSON — розпарсимо
+    const text = await r.text();
+    try { return JSON.parse(text); } catch { return text; }
+  }catch(err){
+    console.error('Fetch error', err);
+    throw err;
+  }
+}
 
     async function trackLead(){try{ if(window.gtag && !GA4_ID.includes('XXXX')) gtag('event','generate_lead'); }catch(e){} try{ if(window.fbq && !/^X+$/.test(META_PIXEL_ID)) fbq('track','Lead'); }catch(e){} }
 
