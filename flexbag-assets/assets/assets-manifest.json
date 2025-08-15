@@ -1,0 +1,22 @@
+{
+  "flexbag-1": {
+    "jpg": "/mnt/data/assets/flexbag-1.jpg",
+    "webp": "/mnt/data/assets/flexbag-1.webp"
+  },
+  "flexbag-2": {
+    "jpg": "/mnt/data/assets/flexbag-2.jpg",
+    "webp": "/mnt/data/assets/flexbag-2.webp"
+  },
+  "flexbag-3": {
+    "jpg": "/mnt/data/assets/flexbag-3.jpg",
+    "webp": "/mnt/data/assets/flexbag-3.webp"
+  },
+  "flexbag-4": {
+    "jpg": "/mnt/data/assets/flexbag-4.jpg",
+    "webp": "/mnt/data/assets/flexbag-4.webp"
+  },
+  "flexbag-spec": {
+    "jpg": "/mnt/data/assets/flexbag-spec.jpg",
+    "webp": "/mnt/data/assets/flexbag-spec.webp"
+  }
+}
